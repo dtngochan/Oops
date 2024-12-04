@@ -115,6 +115,18 @@ public class Processor {
                 case 6:
                     vehicleList.displayAllVehicles();
                     break;
+                case 7:
+                    ArrayList<Car> top3Cars =vehicleList.findTop3CarsBySeats();
+                    if(top3Cars.isEmpty()){
+                        System.out.println("No cars available");
+                    }else{
+                        System.out.println("Top 3 cars with highest number of seats: ");
+                        for(Car carr:top3Cars){
+                            carr.displayDetails();
+                            System.out.println("------------------------");
+                        }
+                    }
+                    break;
                 case 8:
                     Truck longest = vehicleList.findTruckWithLongestDistance();
                     if(longest != null){
