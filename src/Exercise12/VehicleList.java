@@ -89,8 +89,9 @@ public class VehicleList {
     public void findVehicleById(String id) {
         boolean found = false;
         for (Vehicle vehicle : vehicles) {
+            System.out.println("Vehicle found: ");
             if (vehicle.getId().equals(id)) {
-                System.out.println("Vehicle found: ");
+
                 vehicle.displayDetails();
                 found = true;
             }
@@ -110,19 +111,21 @@ public class VehicleList {
             }
         }
     }
-    public ArrayList<Car> findTop3CarsBySeats(){
-        ArrayList<Car> top3Cars = new ArrayList<>();
-        Car top1 = null;
-        Car top2 = null;
-        Car top3 = null;
-        for(Vehicle vehicle:vehicles){
-            if(vehicle instanceof Car){
-                Car car = (Car) vehicle;
-                if(top 1 == null || car.getNumberOfSeats() > top1.getNumberOfSeats()){
-                    top1 = car;
-            }
+
+    public ArrayList<Car> findTop3CarsBySeats() {
+        ArrayList<Car> carsList = new ArrayList<>();
+        for (Vehicle vehicle : vehicles) {
+            if (vehicle instanceof Car) {
+                carsList.add((Car) vehicle);
             }
         }
+        carsList.sort((c1, c2) -> Integer.compare(c2.getNumberOfSeats(), c1.getNumberOfSeats()));
+        ArrayList<Car> top3Cars = new ArrayList<>();
+        for (int i = 0; i < Math.min(3, carsList.size()); i++) {
+            top3Cars.add(carsList.get(i));
+        }
+        return top3Cars;
+
     }
 
     public Truck findTruckWithLongestDistance() {
@@ -137,7 +140,7 @@ public class VehicleList {
         }
         return longest;
     }
-    
+
     public ArrayList<Car> findElectricCars() {
         ArrayList<Car> cars = new ArrayList<>();
         for (Vehicle vehicle : vehicles) {
